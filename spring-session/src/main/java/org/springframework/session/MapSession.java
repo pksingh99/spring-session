@@ -40,7 +40,7 @@ import java.util.UUID;
  * @since 1.0
  * @author Rob Winch
  */
-public final class MapSession implements Session {
+public final class MapSession implements TimestampedSession {
     /**
      * Default {@link #setMaxInactiveInterval(int)} (30 minutes)
      */
@@ -75,9 +75,12 @@ public final class MapSession implements Session {
             Object attrValue = session.getAttribute(attrName);
             this.sessionAttrs.put(attrName, attrValue);
         }
-        this.lastAccessedTime = session.getLastAccessedTime();
-        this.creationTime = session.getCreationTime();
-        this.maxInactiveInterval = session.getMaxInactiveInterval();
+	    if (session instanceof TimestampedSession) {
+		    TimestampedSession timestampedSession = (TimestampedSession) session;
+		    this.lastAccessedTime = timestampedSession.getLastAccessedTime();
+	        this.creationTime = timestampedSession.getCreationTime();
+            this.maxInactiveInterval = timestampedSession.getMaxInactiveInterval();
+	    }
     }
 
     @Override

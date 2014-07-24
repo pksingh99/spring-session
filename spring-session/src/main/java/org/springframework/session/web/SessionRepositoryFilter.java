@@ -17,6 +17,7 @@ package org.springframework.session.web;
 
 import org.springframework.session.Session;
 import org.springframework.session.SessionRepository;
+import org.springframework.session.TimestampedSession;
 import org.springframework.util.Assert;
 
 import javax.servlet.FilterChain;
@@ -51,7 +52,7 @@ import java.util.Set;
  * @since 1.0
  * @author Rob Winch
  */
-public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFilter {
+public class SessionRepositoryFilter<S extends TimestampedSession> extends OncePerRequestFilter {
 	private final SessionRepository<S> sessionRepository;
 
 	private HttpSessionStrategy httpSessionStrategy = new CookieHttpSessionStrategy();

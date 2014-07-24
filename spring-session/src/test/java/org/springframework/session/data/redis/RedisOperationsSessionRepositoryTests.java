@@ -19,6 +19,7 @@ import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.session.MapSession;
 import org.springframework.session.Session;
+import org.springframework.session.TimestampedSession;
 import org.springframework.session.data.redis.RedisOperationsSessionRepository.RedisSession;
 
 
@@ -40,7 +41,7 @@ public class RedisOperationsSessionRepositoryTests {
 
     @Test
     public void createSessionDefaultMaxInactiveInterval() throws Exception {
-        Session session = redisRepository.createSession();
+        TimestampedSession session = redisRepository.createSession();
         assertThat(session.getMaxInactiveInterval()).isEqualTo(new MapSession().getMaxInactiveInterval());
     }
 
@@ -48,7 +49,7 @@ public class RedisOperationsSessionRepositoryTests {
     public void createSessionCustomMaxInactiveInterval() throws Exception {
         int interval = 1;
         redisRepository.setDefaultMaxInactiveInterval(interval);
-        Session session = redisRepository.createSession();
+	    TimestampedSession session = redisRepository.createSession();
         assertThat(session.getMaxInactiveInterval()).isEqualTo(interval);
     }
 

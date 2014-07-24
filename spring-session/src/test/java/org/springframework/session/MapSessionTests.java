@@ -50,7 +50,7 @@ public class MapSessionTests {
 		assertThat(session.hashCode()).isEqualTo(session.getId().hashCode());
 	}
 
-	static class CustomSession implements Session {
+	static class CustomSession implements TimestampedSession {
 
 		@Override
 		public void setLastAccessedTime(long lastAccessedTime) {

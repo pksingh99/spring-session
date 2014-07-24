@@ -20,6 +20,7 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.session.MapSession;
 import org.springframework.session.Session;
 import org.springframework.session.SessionRepository;
+import org.springframework.session.TimestampedSession;
 import org.springframework.util.Assert;
 
 import java.util.HashMap;
@@ -229,7 +230,7 @@ public class RedisOperationsSessionRepository implements SessionRepository<Redis
      * @since 1.0
      * @author Rob Winch
      */
-    final class RedisSession implements Session {
+    final class RedisSession implements TimestampedSession {
         private final MapSession cached;
         private Map<String, Object> delta = new HashMap<String,Object>();
 
